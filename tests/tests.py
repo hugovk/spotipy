@@ -41,7 +41,7 @@ class TestSpotipy(unittest.TestCase):
     def test_album_tracks(self):
         results = self.spotify.album_tracks(self.pinkerton_urn)
         self.assertTrue(len(results['items']) == 10)
-    
+
     def test_album_tracks_many(self):
         results = self.spotify.album_tracks(self.angeles_haydn_urn)
         tracks = results['items']
@@ -144,13 +144,6 @@ class TestSpotipy(unittest.TestCase):
     def test_user(self):
         user = self.spotify.user(user='plamere')
         self.assertTrue(user['uri'] == 'spotify:user:plamere')
-
-    def test_track_bad_id(self):
-        try:
-            track = self.spotify.track(self.bad_id)
-            self.assertTrue(False)
-        except spotipy.SpotifyException:
-            self.assertTrue(True)
 
     def test_track_bad_id(self):
         try:
