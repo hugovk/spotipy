@@ -1,11 +1,9 @@
 # Adds tracks to a playlist
 
-import pprint
 import sys
 
 import spotipy
 import spotipy.util as util
-import simplejson as json
 
 if len(sys.argv) > 1:
     username = sys.argv[1]
@@ -26,6 +24,6 @@ if token:
         for i, item in enumerate(results['items']):
             print i, item['name'], '//', item['artists'][0]['name']
         print
-        
+
 else:
     print("Can't get token for", username)

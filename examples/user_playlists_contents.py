@@ -1,7 +1,6 @@
 # shows a user's playlists (need to be authenticated via oauth)
 
 import sys
-import os
 import spotipy
 import spotipy.util as util
 

@@ -1,7 +1,6 @@
 # -*- coding: latin-1 -*-
 import spotipy
 import unittest
-import pprint
 import requests
 from spotipy.client import SpotifyException
 
@@ -72,7 +71,7 @@ class TestSpotipy(unittest.TestCase):
 
     def test_track_bad_urn(self):
         try:
-            track = self.spotify.track(self.el_scorcho_bad_urn)
+            self.spotify.track(self.el_scorcho_bad_urn)
             self.assertTrue(False)
         except spotipy.SpotifyException:
             self.assertTrue(True)
@@ -123,7 +122,7 @@ class TestSpotipy(unittest.TestCase):
     def test_search_timeout(self):
         sp = spotipy.Spotify(requests_timeout=.1)
         try:
-            results = sp.search(q='my*', type='track')
+            sp.search(q='my*', type='track')
             self.assertTrue(False, 'unexpected search timeout')
         except requests.ReadTimeout:
             self.assertTrue(True, 'expected search timeout')
@@ -147,7 +146,7 @@ class TestSpotipy(unittest.TestCase):
 
     def test_track_bad_id(self):
         try:
-            track = self.spotify.track(self.bad_id)
+            self.spotify.track(self.bad_id)
             self.assertTrue(False)
         except spotipy.SpotifyException:
             self.assertTrue(True)

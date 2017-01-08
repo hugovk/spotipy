@@ -3,9 +3,7 @@
 import spotipy
 from  spotipy import util
 import unittest
-import pprint
 import sys
-import simplejson as json
 
 '''
     Since these tests require authentication they are maintained
@@ -21,15 +19,15 @@ class AuthTestSpotipy(unittest.TestCase):
     '''
 
     playlist = "spotify:user:plamere:playlist:2oCEWyyAPbZp9xhVSxZavx"
-    four_tracks = ["spotify:track:6RtPijgfPKROxEzTHNRiDp", 
+    four_tracks = ["spotify:track:6RtPijgfPKROxEzTHNRiDp",
                 "spotify:track:7IHOIqZUUInxjVkko181PB",
-                "4VrWlk8IQxevMvERoX08iC", 
+                "4VrWlk8IQxevMvERoX08iC",
                 "http://open.spotify.com/track/3cySlItpiPiIAzU3NyHCJf"]
 
-    two_tracks = ["spotify:track:6RtPijgfPKROxEzTHNRiDp", 
+    two_tracks = ["spotify:track:6RtPijgfPKROxEzTHNRiDp",
                 "spotify:track:7IHOIqZUUInxjVkko181PB"]
 
-    other_tracks=["spotify:track:2wySlB6vMzCbQrRnNGOYKa", 
+    other_tracks=["spotify:track:2wySlB6vMzCbQrRnNGOYKa",
             "spotify:track:29xKs5BAHlmlX1u4gzQAbJ",
             "spotify:track:1PB7gRWcvefzu7t3LJLUlf"]
 
@@ -37,7 +35,7 @@ class AuthTestSpotipy(unittest.TestCase):
 
     def test_track_bad_id(self):
         try:
-            track = spotify.track(self.bad_id)
+            spotify.track(self.bad_id)
             self.assertTrue(False)
         except spotipy.SpotifyException:
             self.assertTrue(True)
@@ -69,7 +67,7 @@ class AuthTestSpotipy(unittest.TestCase):
             results = spotify.user_playlist_tracks(user, pid)
             self.assertTrue(len(results['items']) >= 0)
 
-    def user_playlist_tracks(self, user, playlist_id = None, fields=None, 
+    def user_playlist_tracks(self, user, playlist_id = None, fields=None,
         limit=100, offset=0):
 
         # known API issue currently causes this test to fail
@@ -130,7 +128,7 @@ class AuthTestSpotipy(unittest.TestCase):
             cat_id = cat['id']
             response = spotify.category_playlists(category_id=cat_id)
             self.assertTrue(len(response['playlists']["items"]) > 0)
-    
+
     def test_new_releases(self):
         response = spotify.new_releases()
         self.assertTrue(len(response['albums']) > 0)
@@ -167,7 +165,7 @@ class AuthTestSpotipy(unittest.TestCase):
 
     def test_user_playlist_ops(self):
         # create empty playlist
-        playlist_id = self.get_or_create_spotify_playlist(username, 
+        playlist_id = self.get_or_create_spotify_playlist(username,
                 'spotipy-testing-playlist-1')
 
         # remove all tracks from it
@@ -187,7 +185,7 @@ class AuthTestSpotipy(unittest.TestCase):
 
         # remove two tracks from it
 
-        spotify.user_playlist_remove_all_occurrences_of_tracks (username, 
+        spotify.user_playlist_remove_all_occurrences_of_tracks (username,
                     playlist_id, self.two_tracks)
 
         playlist = spotify.user_playlist(username, playlist_id)
@@ -195,7 +193,7 @@ class AuthTestSpotipy(unittest.TestCase):
         self.assertTrue(len(playlist['tracks']['items']) == 2)
 
         # replace with 3 other tracks
-        spotify.user_playlist_replace_tracks(username, 
+        spotify.user_playlist_replace_tracks(username,
             playlist_id, self.other_tracks)
 
         playlist = spotify.user_playlist(username, playlist_id)

@@ -1,6 +1,5 @@
 import spotipy
 import random
-import simplejson as json
 
 '''
     generates a list of songs where the first word in each subsequent song
@@ -60,4 +59,4 @@ if __name__ == '__main__':
     import sys
     title = ' '.join(sys.argv[1:])
     make_chain(sys.argv[1].lower())
-    
+
